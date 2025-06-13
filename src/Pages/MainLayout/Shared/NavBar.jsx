@@ -1,6 +1,13 @@
 import React from 'react';
+import { Link, NavLink } from 'react-router';
+import logoImage from '../../../assets/Logo/shikhonow.png'
 
 const NavBar = () => {
+    const links = <>
+        <li className='hover:bg-secondary rounded-sm'><NavLink to={'/'}>Home</NavLink></li>
+        <li className='hover:bg-secondary rounded-sm'><NavLink to={'/courses'}>Courses</NavLink></li>
+        <li className='hover:bg-secondary rounded-sm'><NavLink to={'/addCourse'}>Add Course</NavLink></li>
+    </>
     return (
         <div className="navbar bg-base-100 shadow-sm">
             <div className="navbar-start">
@@ -11,36 +18,21 @@ const NavBar = () => {
                     <ul
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                        <li><a>Item 1</a></li>
-                        <li>
-                            <a>Parent</a>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </li>
-                        <li><a>Item 3</a></li>
+                        {links}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <Link to='/'><img className='w-12 md:w-24 lg:w-32 rounded-sm md:rounded-lg' src={logoImage} alt="" /></Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                    <li><a>Item 1</a></li>
-                    <li>
-                        <details>
-                            <summary>Parent</summary>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </details>
-                    </li>
-                    <li><a>Item 3</a></li>
+                   {links}
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                <ul className="menu menu-horizontal px-1">
+                    <li className='hover:bg-secondary rounded-sm'><NavLink to='login'>Login</NavLink></li>
+                    <li className='hover:bg-secondary rounded-sm'><NavLink to='Register'>Register</NavLink></li>
+                </ul>
             </div>
         </div>
     );
