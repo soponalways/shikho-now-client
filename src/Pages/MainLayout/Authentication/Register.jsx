@@ -3,20 +3,24 @@ import GoogleSignIn from './Components/GoogleSignIn';
 import GitHubSignIn from './Components/GitHubSignIn';
 import useAuth from '../../../hooks/useAuth';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useLocation, useNavigate } from 'react-router';
 
 const Register = () => {
     const [error, setError] = useState('');
     const { createUser, updateUser } = useAuth(); 
     const [visible, setVisible] = useState(false); 
     const [confirmVisible, setConfirmVisible] = useState(); 
+    const navigate = useNavigate(); 
+    const location = useLocation(); 
+    const from = location.state; 
 
     const handleRegister = e => {
         e.preventDefault(); 
         const form = e.target; 
         const formData = new FormData(form)
         const { password, confirmPassword , ...restUserData} = Object.fromEntries(formData.entries());
-        console.log("user From Register User DAta ", restUserData)
-        console.log(password)
 
         // resset 
         setError('')
@@ -43,7 +47,7 @@ const Register = () => {
             setError("Password or confirm password must me same")
             return;
         }
-        console.log("Validation Successfull")
+        // console.log("Validation Successfull")
 
         createUser(restUserData.email, password) 
         .then(result => {
@@ -54,8 +58,24 @@ const Register = () => {
                     photoURL: restUserData.photo
                 })
                 .then(() => {
-                    console.log("success"); 
-                    
+                    const userData = {
+                        creationTime: result?.user?.metadata?.creationTime,
+                        lastSignInTime: result?.user?.metadata?.lastSignInTime,
+                        uid : result?.user?.uid, 
+                        emailVerified: result?.user?.emailVerified,
+                        ...restUserData
+                    }
+
+                    axios.post('http://localhost:3000/users', userData)
+                    .then(result => {
+                        if (result.data.insertedId) {
+                            toast.success('You have successfully registered'); 
+                            navigate(from ? from : '/'); 
+                        }
+                    })
+                    .catch(error => {
+                        setError(error.message)
+                    })
                 })
                 .catch(error => {
                     setError(error.message)
@@ -75,10 +95,10 @@ const Register = () => {
                 {/* Scoaiol Register */}
                 <div className="flex flex-col md:flex-row gap-2 md:gap-3 lg:gap-4 my-3 md:my-4 lg:my-5">
                     <div className="w-full">
-                        <GoogleSignIn value='Continue with google'></GoogleSignIn>
+                        <GoogleSignIn from={from} value='Continue with google'></GoogleSignIn>
                     </div>
                     <div className="w-full">
-                        <GitHubSignIn value='Continue with github'></GitHubSignIn>
+                        <GitHubSignIn from={from} value='Continue with github'></GitHubSignIn>
                     </div>
                 </div>
 
