@@ -10,46 +10,46 @@ const AuthProvider = ({children}) => {
 
     console.log(auth)
     
-    // const createUser = (email, password) => {
-    //     setLoading(true)
-    //     return createUserWithEmailAndPassword(auth, email, password);
-    // };
-    // const popUpSignIn = provider => {
-    //     setLoading(true)
-    //     return signInWithPopup(auth, provider);
-    // };
-    // const passwordSignIn = (email, password) => {
-    //     setLoading(true)
-    //     return signInWithEmailAndPassword(auth, email, password);
-    // };
-    // const logoutUser = () => {
-    //     setLoading(true)
-    //     return signOut(auth);
-    // }
+    const createUser = (email, password) => {
+        setLoading(true)
+        return createUserWithEmailAndPassword(auth, email, password);
+    };
+    const popUpSignIn = provider => {
+        setLoading(true)
+        return signInWithPopup(auth, provider);
+    };
+    const passwordSignIn = (email, password) => {
+        setLoading(true)
+        return signInWithEmailAndPassword(auth, email, password);
+    };
+    const logoutUser = () => {
+        setLoading(true)
+        return signOut(auth);
+    }
     
     const userInfo = {
         user, 
         setUser, 
         loading, 
         setLoading,
-        // createUser,
-        // popUpSignIn,
-        // passwordSignIn,
-        // logoutUser,
+        createUser,
+        popUpSignIn,
+        passwordSignIn,
+        logoutUser,
     }; 
 
     // Handle Side Effect 
-    // useEffect(() => {
-    //     const unSubscribe = onAuthStateChanged(auth, savedUser => {
-    //         setLoading(false);
-    //         setUser(savedUser)
-    //         console.log(savedUser)
-    //     });
-    //     return () => {
-    //         unSubscribe();
-    //         setUser(null)
-    //     }
-    // }, [])
+    useEffect(() => {
+        const unSubscribe = onAuthStateChanged(auth, savedUser => {
+            setLoading(false);
+            setUser(savedUser)
+            console.log(savedUser)
+        });
+        return () => {
+            unSubscribe();
+            setUser(null)
+        }
+    }, [])
     
     return <AuthContext value={userInfo}>{children}</AuthContext>
 };
