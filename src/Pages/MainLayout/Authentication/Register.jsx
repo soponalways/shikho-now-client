@@ -3,6 +3,13 @@ import GoogleSignIn from './Components/GoogleSignIn';
 import GitHubSignIn from './Components/GitHubSignIn';
 
 const Register = () => {
+    const handleRegister = e => {
+        e.preventDefault(); 
+        const form = e.target; 
+        const formData = new FormData(form)
+        const newUser = Object.fromEntries(formData.entries());
+        console.log("user From Register User DAta ", newUser)
+    }
     return (
         <div>
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-md md:w-5/6 mx-auto border p-4">
@@ -22,7 +29,7 @@ const Register = () => {
                 <div className="divider text-base md:text-lg lg:text-xl text-gray-500 font-medium"> Or Login With</div>
 
                 {/* Register Form */}
-                <form className="my-2 md:my-3 lg:my-4 space-y-1 md:space-y-2">
+                <form onSubmit={handleRegister} className="my-2 md:my-3 lg:my-4 space-y-1 md:space-y-2">
                     <div>
                         <label className="label text-lg">Name</label>
                         <input type="text" name="name" className="input w-full" placeholder="Type your name" />
