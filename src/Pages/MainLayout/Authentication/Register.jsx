@@ -6,7 +6,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Register = () => {
     const [error, setError] = useState('');
-    const { createUser } = useAuth(); 
+    const { createUser, updateUser } = useAuth(); 
     const [visible, setVisible] = useState(false); 
     const [confirmVisible, setConfirmVisible] = useState(); 
 
@@ -44,6 +44,27 @@ const Register = () => {
             return;
         }
         console.log("Validation Successfull")
+
+        createUser(restUserData.email, password) 
+        .then(result => {
+            if(result.user.email === restUserData.email) {
+                console.log("that are same ")
+                updateUser({
+                    displayName: restUserData.name, 
+                    photoURL: restUserData.photo
+                })
+                .then(() => {
+                    console.log("success"); 
+                    
+                })
+                .catch(error => {
+                    setError(error.message)
+                })
+            }
+        })
+        .catch(error => {
+            setError(error.message)
+        })
     }
     return (
         <div>
