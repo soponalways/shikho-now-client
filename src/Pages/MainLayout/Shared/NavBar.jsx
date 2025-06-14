@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router';
 import logoImage from '../../../assets/Logo/shikhonow.png'
+import useAuth from '../../../hooks/useAuth';
 
 const NavBar = () => {
+    const { user } = useAuth();
+    console.log('user on navbar ', user)
+
     const links = <>
         <li className='hover:bg-secondary rounded-sm'><NavLink to={'/'}>Home</NavLink></li>
         <li className='hover:bg-secondary rounded-sm'><NavLink to={'/courses'}>Courses</NavLink></li>
@@ -25,13 +29,25 @@ const NavBar = () => {
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                   {links}
+                    {links}
                 </ul>
             </div>
             <div className="navbar-end">
                 <ul className="menu menu-horizontal px-1">
-                    <li className='hover:bg-secondary rounded-sm'><NavLink to='login'>Login</NavLink></li>
-                    <li className='hover:bg-secondary rounded-sm'><NavLink to='Register'>Register</NavLink></li>
+                    {
+                        user ? <>
+                                <div className="avatar">
+                                    <div className="w-6 md:w-8 lg:w-12 cursor-pointer rounded-full">
+                                        <img src={user.photoURL} />
+                                    </div>
+                                </div>
+                        </>
+                            :
+                            <>
+                                <li className='hover:bg-secondary rounded-sm'><NavLink to='login'>Login</NavLink></li>
+                                <li className='hover:bg-secondary rounded-sm'><NavLink to='Register'>Register</NavLink></li>
+                            </>
+                    }
                 </ul>
             </div>
         </div>
