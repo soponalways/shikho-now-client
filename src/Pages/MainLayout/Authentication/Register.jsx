@@ -1,14 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import GoogleSignIn from './Components/GoogleSignIn';
 import GitHubSignIn from './Components/GitHubSignIn';
+import useAuth from '../../../hooks/useAuth';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Register = () => {
+    const [error, setError] = useState('');
+    const { createUser } = useAuth(); 
+    const [visible, setVisible] = useState(false); 
+    const [confirmVisible, setConfirmVisible] = useState(); 
+
     const handleRegister = e => {
         e.preventDefault(); 
         const form = e.target; 
         const formData = new FormData(form)
-        const newUser = Object.fromEntries(formData.entries());
-        console.log("user From Register User DAta ", newUser)
+        const { password, confirmPassword , ...restUserData} = Object.fromEntries(formData.entries());
+        console.log("user From Register User DAta ", restUserData)
+        console.log(password)
+
+        // resset 
+        setError('')
+        
+        if (!/^.{8,}$/.test(password)){
+            setError('Password must be at-least 8 character long')
+            return; 
+        } else if (!/^(?=.*[A-Z]).+$/.test(password)){
+            setError('Password must have 1 uppercase')
+            return; 
+        } else if (!/^(?=.*[a-z]).+$/.test(password)){
+            setError('Password must have 1 lowercase letter')
+            return; 
+        } else if (!/^(?=.*[^a-zA-Z0-9]).+$/.test(password)){
+            setError('Password must have 1 special character')
+            return; 
+        } else if (!/^(?=.*\d).+$/.test(password)){
+            setError('Password must have 1 number')
+            return; 
+        } else if(password === restUserData.email) {
+            setError('Your email address or password are same')
+            return; 
+        } else if(password !== confirmPassword) {
+            setError("Password or confirm password must me same")
+            return;
+        }
+        console.log("Validation Successfull")
     }
     return (
         <div>
@@ -42,14 +77,19 @@ const Register = () => {
                         <label className="label text-lg">Email</label>
                         <input type="email" name="email" className="input w-full" placeholder="Type Your Email" />
                     </div>
-                    <div>
+                    <div className='relative'>
                         <label className="label text-lg">Password</label>
-                        <input type="password" name="password" className="input w-full" placeholder="Type A Password" />
+                        <input type={visible ? 'text' : 'password'} name="password" className="input w-full" placeholder="Type A Password" />
+                        <span className='absolute top-10 right-5 cursor-pointer' onClick={() => setVisible(previous => !previous)}>{visible ? <FaEyeSlash size={16} /> : <FaEye size={16} /> }</span>
                     </div>
-                    <div>
+                    <div className='relative'>
                         <label className="label text-lg">Password</label>
-                        <input type="password" name="confirmPassword" className="input w-full" placeholder="Type Again Your Password" />
+                        <input type={confirmVisible ? 'text' : 'password'} name="confirmPassword" className="input w-full" placeholder="Type Again Your Password" />
+                        <span className='absolute top-10 right-5 cursor-pointer' onClick={() => setConfirmVisible(previous => !previous)}>{confirmVisible ? <FaEyeSlash size={16} /> : <FaEye size={16} />}</span>
                     </div>
+                    {
+                        error && <p className='text-red-500 font-medium text-base'>{error}</p>
+                    }
                     <input type="submit" className="btn btn-secondary my-3" value="Register now" />
                 </form>
             </fieldset>
