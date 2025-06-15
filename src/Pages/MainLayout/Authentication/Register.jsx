@@ -6,7 +6,6 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router';
-import { Helmet } from 'react-helmet';
 
 const Register = () => {
     const [error, setError] = useState('');
@@ -90,9 +89,7 @@ const Register = () => {
     return (
         <div>
             <div>
-                <Helmet>
-                    <title>Register a Account</title>
-                </Helmet>
+                <title>Register a Account</title>
             </div>
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-md md:w-5/6 mx-auto border p-4">
                 <legend className="fieldset-legend text-center text-xl md:text-2xl lg:text-3xl">Create An Account</legend>

@@ -4,7 +4,6 @@ import GoogleSignIn from "./Components/GoogleSignIn";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { Helmet } from "react-helmet";
 
 const Login = () => {
     const location = useLocation(); 
@@ -39,9 +38,7 @@ const Login = () => {
     return (
         <div>
             <div>
-                <Helmet>
-                    <title>Login Your Account</title>
-                </Helmet>
+                <title>Login Your Account</title>
             </div>
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-md mx-auto border p-4">
                 <legend className="fieldset-legend text-center text-xl md:text-2xl lg:text-3xl">Login Your Account</legend>

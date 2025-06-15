@@ -1,35 +1,48 @@
-import { Helmet } from 'react-helmet';
 import useAuth from '../../../hooks/useAuth';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { toast } from 'react-toastify';
 
 const AddCourse = () => {
     const {user} = useAuth(); 
+    const axiosSecure = useAxiosSecure(); 
     
     const handleAddCourse = e => {
         e.preventDefault(); 
         const form = e.target; 
         const formData = new FormData(form); 
-        const { prerequisites : prerequisitesString , ...restCourseData} = Object.fromEntries(formData.entries()); 
+        const { prerequisites , ...restCourseData} = Object.fromEntries(formData.entries()); 
 
-        const prerequisites = prerequisitesString.split(','); 
+        const prerequisitesArray = prerequisites.split(','); 
         const creationTime = new Date().getTime(); 
 
         const courseData = {
             ...restCourseData, 
-            prerequisites, 
+            prerequisites: prerequisitesArray, 
             creationTime, 
             adminEmail : user?.email, 
             adminName : user?.displayName || user?.name, 
         }
 
         console.log(courseData)
+        axiosSecure.post(`/course`, courseData)
+        .then(res => {
+            if (res.data.insertedId) {
+                if (restCourseData.publishedStatus === "Draft") {
+                    toast.success("he Course saved in Draft please update as published")
+                } else if (restCourseData.publishedStatus === "Published") {
+                    toast.success("You have successfully added the course")
+                }
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
     }
 
     return (
         <>
             <div>
-                <Helmet>
-                    <title>Add a course</title>
-                </Helmet>
+               <title>Add a course</title>
             </div>
             <div className='w-11/12 mx-auto'>
                 <div className='text-center space-y-2'>
