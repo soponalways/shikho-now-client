@@ -2,16 +2,26 @@ import React from 'react';
 import { Link, NavLink } from 'react-router';
 import logoImage from '../../../assets/Logo/shikhonow.png'
 import useAuth from '../../../hooks/useAuth';
+import { toast } from 'react-toastify';
 
 const NavBar = () => {
-    const { user } = useAuth();
-    console.log('user on navbar ', user)
+    const { user, logoutUser } = useAuth();
 
     const links = <>
         <li className='hover:bg-secondary rounded-sm'><NavLink to={'/'}>Home</NavLink></li>
         <li className='hover:bg-secondary rounded-sm'><NavLink to={'/courses'}>Courses</NavLink></li>
         <li className='hover:bg-secondary rounded-sm'><NavLink to={'/addCourse'}>Add Course</NavLink></li>
     </>
+
+    const handleLogout = () => {
+        logoutUser()
+        .then(() => {
+            toast.success('Logout successfull')
+        })
+        .catch(error => {
+            toast.warning(error.message)
+        })
+    }
     return (
         <div className="navbar bg-base-100 shadow-sm">
             <div className="navbar-start">
@@ -35,13 +45,14 @@ const NavBar = () => {
             <div className="navbar-end">
                 <ul className="menu menu-horizontal px-1">
                     {
-                        user ? <>
+                        user ? <div className='flex gap-3 md:gap-4 lg:gap-5 items-center'>
                                 <div className="avatar">
                                     <div className="w-6 md:w-8 lg:w-12 cursor-pointer rounded-full">
                                         <img src={user.photoURL} />
                                     </div>
                                 </div>
-                        </>
+                                <li className='hover:bg-secondary rounded-sm'><button onClick={handleLogout}>Log Out</button></li>
+                        </div>
                             :
                             <>
                                 <li className='hover:bg-secondary rounded-sm'><NavLink to='login'>Login</NavLink></li>
