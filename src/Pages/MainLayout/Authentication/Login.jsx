@@ -21,7 +21,7 @@ const Login = () => {
         .then(result => {
             setUser(result.user); 
             const userData = result?.user?.metadata?.lastSignInTime; 
-            axios.patch(`http://localhost:3000/users/${result?.user?.email}`, {userData})
+            axios.patch(`${import.meta.env.VITE_API_URL}/users/${result?.user?.email}`, {userData})
             .then(data => {
                 if (data.data.matchedCount) {
                     toast.success('You have Successfully Sign in with email and password')

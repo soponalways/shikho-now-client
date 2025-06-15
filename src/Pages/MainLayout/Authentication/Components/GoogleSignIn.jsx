@@ -22,7 +22,7 @@ const GoogleSignIn = ({value, from}) => {
                 photo: createdUser?.photoURL, 
                 email: createdUser?.email, 
             }; 
-            axios.put(`http://localhost:3000/users/${createdUser.email}`, newUser)
+            axios.put(`${import.meta.env.VITE_API_URL}/users/${createdUser.email}`, newUser)
                 .then(result => {
                     console.log(result)
                     if (result.data.modifiedCount) {

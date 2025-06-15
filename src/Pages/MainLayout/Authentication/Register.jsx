@@ -66,7 +66,7 @@ const Register = () => {
                         ...restUserData
                     }
 
-                    axios.post('http://localhost:3000/users', userData)
+                    axios.post(`${import.meta.env.VITE_API_URL}/users`, userData)
                     .then(result => {
                         if (result.data.insertedId) {
                             toast.success('You have successfully registered'); 
