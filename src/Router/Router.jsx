@@ -6,6 +6,7 @@ import Register from "../Pages/MainLayout/Authentication/Register";
 import PrivateRoute from "../Routes/PrivateRoute";
 import AddCourse from "../Pages/MainLayout/AddCourse/AddCourse";
 import ManageCourse from "../Pages/MainLayout/ManageCourse/ManageCourse";
+import LoadingSpineer from "../Pages/MainLayout/LoadingSpineer/LoadingSpineer";
 
 const router = createBrowserRouter([
     {
