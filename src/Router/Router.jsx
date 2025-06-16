@@ -10,40 +10,47 @@ import LoadingSpineer from "../Pages/MainLayout/LoadingSpineer/LoadingSpineer";
 import EditCourse from "../Pages/MainLayout/EditCourse/EditCourse";
 import Courses from "../Pages/MainLayout/Courses/Courses";
 import axios from "axios";
+import CourseDetails from "../Pages/MainLayout/CourseDetails/CourseDetails";
 
 const router = createBrowserRouter([
     {
-        path:'/', 
-        Component: MainLayout, 
+        path: '/',
+        Component: MainLayout,
         children: [
             {
                 index: true,
                 Component: Home
-            }, 
+            },
             {
-                path:'/login', 
+                path: '/login',
                 Component: Login
-            }, 
+            },
             {
-                path: "/register", 
+                path: "/register",
                 Component: Register
-            }, 
+            },
             {
-                path: '/addCourse', 
+                path: '/addCourse',
                 element: <PrivateRoute><AddCourse></AddCourse></PrivateRoute>
-            }, 
+            },
             {
-                path: '/manageCourse', 
+                path: '/manageCourse',
                 element: <PrivateRoute><ManageCourse></ManageCourse></PrivateRoute>
-            }, 
+            },
             {
-                path: '/editCourse/', 
+                path: '/editCourse/',
                 element: <PrivateRoute><EditCourse></EditCourse></PrivateRoute>
-            }, 
+            },
             {
-                path: '/courses', 
-                Component: Courses, 
-                loader: () => axios.get(`${import.meta.env.VITE_API_URL}/courses`).then(res => res.data), 
+                path: '/courses',
+                Component: Courses,
+                loader: () => axios.get(`${import.meta.env.VITE_API_URL}/courses`).then(res => res.data),
+                HydrateFallback: LoadingSpineer
+            },
+            {
+                path: `/course/:slug/:course_id`,
+                Component: CourseDetails,
+                loader: ({ params }) => axios.get(`${import.meta.env.VITE_API_URL}/course/${params?.slug}/${params?.course_id}`).then(res => res.data),
                 HydrateFallback: LoadingSpineer
             }
         ]

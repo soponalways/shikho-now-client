@@ -3,7 +3,7 @@ import useDaysLeft from '../../../hooks/useDaysLeft';
 import { Link } from 'react-router';
 
 const CourseCard = ({ course }) => {
-    const { courseTitle, startDate, lessons, imageURL, _id } = course || {};
+    const { courseTitle, startDate, lessons, imageURL, _id , slug} = course || {};
     const { daysLeft } = useDaysLeft(); 
     const dayLeft = daysLeft(startDate); 
     return (
@@ -23,7 +23,7 @@ const CourseCard = ({ course }) => {
                 </h2>
 
             </div>
-                <Link to={`/courseDetails/${_id}`} className='btn btn-accent hover:btn-secondary w-11/12 mx-auto my-3 md:my-4 lg:my-5'>See More</Link>
+                <Link to={`/course/${slug}/${_id}`} className='btn btn-accent hover:btn-secondary w-11/12 mx-auto my-3 md:my-4 lg:my-5'>See More</Link>
         </div>
     );
 };
