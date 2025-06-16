@@ -8,6 +8,8 @@ import AddCourse from "../Pages/MainLayout/AddCourse/AddCourse";
 import ManageCourse from "../Pages/MainLayout/ManageCourse/ManageCourse";
 import LoadingSpineer from "../Pages/MainLayout/LoadingSpineer/LoadingSpineer";
 import EditCourse from "../Pages/MainLayout/EditCourse/EditCourse";
+import Courses from "../Pages/MainLayout/Courses/Courses";
+import axios from "axios";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +39,12 @@ const router = createBrowserRouter([
             {
                 path: '/editCourse/', 
                 element: <PrivateRoute><EditCourse></EditCourse></PrivateRoute>
+            }, 
+            {
+                path: '/courses', 
+                Component: Courses, 
+                loader: () => axios.get(`${import.meta.env.VITE_API_URL}/courses`).then(res => res.data), 
+                HydrateFallback: LoadingSpineer
             }
         ]
     }

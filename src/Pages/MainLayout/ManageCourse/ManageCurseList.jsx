@@ -49,6 +49,7 @@ const ManageCurseList = ({ getCouresesByEmail }) => {
                         <th>No.</th>
                         <th>Title</th>
                         <th>Short Description</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
