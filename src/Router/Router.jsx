@@ -7,6 +7,7 @@ import PrivateRoute from "../Routes/PrivateRoute";
 import AddCourse from "../Pages/MainLayout/AddCourse/AddCourse";
 import ManageCourse from "../Pages/MainLayout/ManageCourse/ManageCourse";
 import LoadingSpineer from "../Pages/MainLayout/LoadingSpineer/LoadingSpineer";
+import EditCourse from "../Pages/MainLayout/EditCourse/EditCourse";
 
 const router = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
             {
                 path: '/manageCourse', 
                 element: <PrivateRoute><ManageCourse></ManageCourse></PrivateRoute>
+            }, 
+            {
+                path: '/editCourse/', 
+                element: <PrivateRoute><EditCourse></EditCourse></PrivateRoute>
             }
         ]
     }
