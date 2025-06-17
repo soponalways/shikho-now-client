@@ -52,7 +52,6 @@ const Register = () => {
         createUser(restUserData.email, password) 
         .then(result => {
             if(result.user.email === restUserData.email) {
-                console.log("that are same ")
                 updateUser({
                     displayName: restUserData.name, 
                     photoURL: restUserData.photo

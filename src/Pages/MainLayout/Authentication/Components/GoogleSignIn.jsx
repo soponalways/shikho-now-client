@@ -24,7 +24,6 @@ const GoogleSignIn = ({value, from}) => {
             }; 
             axios.put(`${import.meta.env.VITE_API_URL}/users/${createdUser.email}`, newUser)
                 .then(result => {
-                    console.log(result)
                     if (result.data.modifiedCount) {
                         toast.success('You have successfully Sign In with google');
                         navigate(from ? from : '/');

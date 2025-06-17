@@ -46,8 +46,6 @@ const EditCourseForm = ({ pendingPromise }) => {
                 slug
             }; 
     
-            console.log('data after update', updatedCourseData); 
-    
             axiosSecure.put(`/course/update/${_id}/admin?email=${adminEmail}`, updatedCourseData)
             .then(res => {
                 const data = res.data; 

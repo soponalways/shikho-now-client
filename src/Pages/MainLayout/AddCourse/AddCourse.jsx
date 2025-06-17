@@ -23,7 +23,6 @@ const AddCourse = () => {
             adminName : user?.displayName || user?.name, 
         }
 
-        console.log(courseData)
         axiosSecure.post(`/course`, courseData)
         .then(res => {
             if (res.data.insertedId) {

@@ -9,6 +9,9 @@ const MyEnrolledCourses = () => {
     const {user} = useAuth(); 
     return (
         <div>
+            <div>
+                <title>My Enrolled Course | Shikho now</title>
+            </div>
             <div className='w-11/12 mx-auto'>
                 <h2 className='text-3xl font-medium md:text-4xl md:font-semibold lg:text-5xl lg:font-bold text-center mt-4 md:mt-6 lg:mt-8'>Your Learning Journey Starts Here </h2>
                 <h3 className='text-xl md:text-2xl lg:text-3xl font-medium md:font-semibold  text-center mt-2 md:mt-3 lg:mt-5'>Keep learning with Shikho Now – here are your enrolled courses.</h3>

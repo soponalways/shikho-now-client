@@ -3,6 +3,7 @@ import ManageCourseRow from './ManageCourseRow';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router';
 
 const ManageCurseList = ({ getCouresesByEmail }) => {
     const axiosSecure = useAxiosSecure();
@@ -39,6 +40,13 @@ const ManageCurseList = ({ getCouresesByEmail }) => {
             }
         });
     }
+
+    if(courses.length === 0 ) {
+            return <div>
+                <h3 className='text-2xl md:text-3xl lg:text-4xl font-medium md:font-semibold lg:font-bold text-center'>You Have not add a Course</h3>
+                <p className='text-center text-lg md:text-xl lg:text-2xl font-normal md:font-medium lg:font-bold my-4 md:my-6'>Please go to <Link className='text-blue-600 underline' to={'/addCourse'}>Add course</Link> page and then course add</p>
+            </div>
+        }
 
     return (
         <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">

@@ -5,7 +5,6 @@ import { Link } from 'react-router';
 
 const MyEnrolledList = ({ getEnrolledByEmail }) => {
     const [enrolledCourse, setEnrolledCourse] = useState(use(getEnrolledByEmail));
-    console.log(enrolledCourse);
     
     if(enrolledCourse.length === 0 ) {
         return <div>
