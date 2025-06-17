@@ -14,6 +14,7 @@ const NavBar = () => {
             user && <>
                 <li className='hover:bg-secondary rounded-sm'><NavLink to={'/addCourse'}>Add Course</NavLink></li>
                 <li className='hover:bg-secondary rounded-sm'><NavLink to={'/manageCourse'}>Manage Course</NavLink></li>
+                <li className='hover:bg-secondary rounded-sm'><NavLink to={'/enrolled'}>My Enrolled Courses</NavLink></li>
             </>
         }
     </>

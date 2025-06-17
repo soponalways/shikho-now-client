@@ -11,6 +11,7 @@ import EditCourse from "../Pages/MainLayout/EditCourse/EditCourse";
 import Courses from "../Pages/MainLayout/Courses/Courses";
 import axios from "axios";
 import CourseDetails from "../Pages/MainLayout/CourseDetails/CourseDetails";
+import MyEnrolledCourses from "../Pages/MainLayout/MyEnrolledCourses/MyEnrolledCourses";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
                 Component: CourseDetails,
                 loader: ({ params }) => axios.get(`${import.meta.env.VITE_API_URL}/course/${params?.slug}/${params?.course_id}`).then(res => res.data),
                 HydrateFallback: LoadingSpineer
+            }, 
+            {
+                path: '/enrolled', 
+                element: <PrivateRoute><MyEnrolledCourses></MyEnrolledCourses></PrivateRoute>
             }
         ]
     }
