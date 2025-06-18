@@ -1,3 +1,4 @@
+import Banner from "./Banner/Banner";
 
 const Home = () => {
     return (
@@ -5,7 +6,9 @@ const Home = () => {
             <div>
                 <title>Home | Shikho Now</title>
             </div>
-            <h3 className='text-2xl font-semibold'>Hello from Home pages </h3>
+            <header>
+                <Banner></Banner>
+            </header>
         </div>
     );
 };

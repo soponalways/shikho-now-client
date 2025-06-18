@@ -1,1 +1,2 @@
-# React + Vite
+# Shikho Now 
+### Shikho now is a inovative learing platform. fist of of a unknown user can register and login github and google. here Student can Enrolle the specific Course. and then student can see there enrolled courses and manage and remove the enrollement. Admin Can add course and view there createing course . 
