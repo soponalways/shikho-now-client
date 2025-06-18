@@ -3,15 +3,16 @@ import { useLoaderData } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 const CourseDetails = () => {
     const course = useLoaderData();
     const { user } = useAuth();
-    const axiosSecure = useAxiosSecure(); 
-    const [isEnrolled, setIsEnrolled] = useState(false); 
-    const userEmail = user?.email; 
+    const axiosSecure = useAxiosSecure();
+    const [isEnrolled, setIsEnrolled] = useState(false);
+    const userEmail = user?.email;
     const {
-        _id, 
+        _id,
         adminEmail,
         courseTitle,
         shortDescription,
@@ -28,39 +29,55 @@ const CourseDetails = () => {
         instractorImage,
         instractorBio,
         prerequisites,
-        fullDescription, 
+        fullDescription,
         enrolledStudents
     } = course || {};
 
-    const handleEnrolle = (course_id , studentEmail) => {
-        axiosSecure.put('/course/enroll', {course_id, studentEmail} )
-        .then(res => {
-            const data = res.data; 
-            if (data.modifiedCount) {
-                setIsEnrolled(true); 
-                toast.success("You have succesfully enrolled for these course")
-            }
-        }).catch(error => {
-            console.log(error)
-            toast.error(error.message)
-        })
-    }; 
+    const handleEnrolle = (course_id, studentEmail) => {
+        axiosSecure.put('/course/enroll', { course_id, studentEmail })
+            .then(res => {
+                const data = res.data;
+                if (data.modifiedCount) {
+                    setIsEnrolled(true);
+                    toast.success("You have succesfully enrolled for these course")
+                } else if (!data.modifiedCount) {
+                    axiosSecure.put(`/course/unEnrolle?studentEmail=${studentEmail}`)
+                        .then(res => {
+                            const data = res.data;
+                            setIsEnrolled(false);
+                            if (data.modifiedCount) {
+                                Swal.fire({
+                                    title: "Removed Enrolledment",
+                                    text: "You Have Successfully UnEnrolled",
+                                    icon: "success"
+                                });
+                            }
+                        }).catch(error => {
+                            console.log(error)
+                            toast.error(error.message)
+                        })
+                }
+            }).catch(error => {
+                console.log(error)
+                toast.error(error.message)
+            })
+    };
 
     // Hanlde side effect
     useEffect(() => {
-        const enrolledStatus = enrolledStudents?.map(student => student.email === user?.email); 
-        if(enrolledStatus === true) {
-            setIsEnrolled(true)
-        } else {
-            setIsEnrolled(false); 
-        }
-        setIsEnrolled(enrolledStatus)
+        enrolledStudents?.forEach(student => {
+            if (student.email === user?.email) {
+                setIsEnrolled(true)
+            } else {
+                setIsEnrolled(false);
+            }
+        });
     }, [enrolledStudents, userEmail, course, user])
     return (
         <>
-        <div>
-            <title>Course Details | {courseTitle}</title>
-        </div>
+            <div>
+                <title>Course Details | {courseTitle}</title>
+            </div>
             <div className='w-11/12 mx-auto my-4 md:my-6 lg:my-8'>
                 <div className='flex flex-col-reverse md:flex-row gap-4 md:gap-6 lg:gap-10 '>
                     <div className='space-y-2 md:space-y-4 lg:space-y-6'>
