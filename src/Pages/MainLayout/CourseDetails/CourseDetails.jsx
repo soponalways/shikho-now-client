@@ -54,6 +54,7 @@ const CourseDetails = () => {
         } else {
             setIsEnrolled(false); 
         }
+        setIsEnrolled(enrolledStatus)
     }, [enrolledStudents, userEmail, course, user])
     return (
         <>

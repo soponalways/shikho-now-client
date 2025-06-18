@@ -1,6 +1,7 @@
 import Banner from "./Banner/Banner";
 import CoursesSection from "./CoursesSection/CoursesSection";
 import LearingingIsEarning from "./LearningIsEarning/LearingingIsEarning";
+import PopularCourses from "./PopularCourses/PopularCourses";
 import ProjectsBasedLearning from "./ProjectsBaseLearing/ProjectsBasedLearning";
 
 const Home = () => {
@@ -16,6 +17,10 @@ const Home = () => {
                 {/* courses Section  */}
                 <section className="my-4 md:my-6 lg:my-8">
                     <CoursesSection></CoursesSection>
+                </section>
+                {/* popular courses Section  */}
+                <section className="my-4 md:my-6 lg:my-8">
+                    <PopularCourses></PopularCourses>
                 </section>
 
                 {/* Learing is Earning section  */}
