@@ -12,11 +12,13 @@ import Courses from "../Pages/MainLayout/Courses/Courses";
 import axios from "axios";
 import CourseDetails from "../Pages/MainLayout/CourseDetails/CourseDetails";
 import MyEnrolledCourses from "../Pages/MainLayout/MyEnrolledCourses/MyEnrolledCourses";
+import ErrorPage from "../Pages/ErrorPages/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path: '/',
         Component: MainLayout,
+        errorElement : <ErrorPage></ErrorPage>, 
         children: [
             {
                 index: true,
@@ -59,6 +61,10 @@ const router = createBrowserRouter([
                 element: <PrivateRoute><MyEnrolledCourses></MyEnrolledCourses></PrivateRoute>
             }
         ]
+    }, 
+    {
+        path : '/*', 
+        Component: ErrorPage
     }
 ])
 
