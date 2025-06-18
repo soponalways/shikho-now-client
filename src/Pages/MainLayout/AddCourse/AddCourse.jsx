@@ -26,6 +26,7 @@ const AddCourse = () => {
         axiosSecure.post(`/course`, courseData)
         .then(res => {
             if (res.data.insertedId) {
+                form.reset()
                 if (restCourseData.publishedStatus === "Draft") {
                     toast.success("he Course saved in Draft please update as published")
                 } else if (restCourseData.publishedStatus === "Published") {

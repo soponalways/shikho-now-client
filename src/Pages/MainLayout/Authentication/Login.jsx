@@ -4,10 +4,13 @@ import GoogleSignIn from "./Components/GoogleSignIn";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
     const location = useLocation(); 
     const from = location.state; 
+    const [visible, setVisible] = useState(false); 
     const { passwordSignIn, setUser } = useAuth(); 
     const navigate = useNavigate(); 
 
@@ -57,9 +60,10 @@ const Login = () => {
                         <label className="label text-lg">Email</label>
                         <input type="email" name="email" className="input w-full" placeholder="Enter Your Email" />
                     </div>
-                    <div>
+                    <div className="relative">
                         <label className="label text-lg">Password</label>
-                        <input type="password" name="password" className="input w-full" placeholder="Enter Your Password" />
+                        <input type={visible ? 'text' : 'password'} name="password" className="input w-full" placeholder="Enter Your Password" />
+                        <span className='absolute top-10 right-5 cursor-pointer' onClick={() => setVisible(previous => !previous)}>{visible ? <FaEyeSlash size={16} /> : <FaEye size={16} /> }</span>
                     </div>
                     <input type="submit" className="btn btn-secondary my-3" value="Login now" />
                 </form>

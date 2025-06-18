@@ -49,7 +49,7 @@ const EditCourseForm = ({ pendingPromise }) => {
             axiosSecure.put(`/course/update/${_id}/admin?email=${adminEmail}`, updatedCourseData)
             .then(res => {
                 const data = res.data; 
-
+                form.reset();
                 if (data.modifiedCount) {
                     toast.success("Your Course is updated successfully"); 
                 } else if (!data.modifiedCount && data.matchedCount) {

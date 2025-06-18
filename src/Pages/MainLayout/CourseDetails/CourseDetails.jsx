@@ -48,9 +48,13 @@ const CourseDetails = () => {
 
     // Hanlde side effect
     useEffect(() => {
-        const enrolledStatus = enrolledStudents?.map(student => student.email === userEmail); 
-        setIsEnrolled(enrolledStatus); 
-    }, [enrolledStudents, userEmail, course])
+        const enrolledStatus = enrolledStudents?.map(student => student.email === user?.email); 
+        if(enrolledStatus === true) {
+            setIsEnrolled(true)
+        } else {
+            setIsEnrolled(false); 
+        }
+    }, [enrolledStudents, userEmail, course, user])
     return (
         <>
         <div>
