@@ -1,13 +1,26 @@
 import React from 'react';
 import useDaysLeft from '../../../hooks/useDaysLeft';
 import { Link } from 'react-router';
+import { motion } from "motion/react"
 
 const CourseCard = ({ course }) => {
     const { courseTitle, startDate, lessons, imageURL, _id , slug} = course || {};
     const { daysLeft } = useDaysLeft(); 
     const dayLeft = daysLeft(startDate); 
+    const transition = {
+        ease: [0, 0.71, 0.2, 1.01],
+        duration: 2, 
+        type: "spring",
+        bounce: 0.25
+    }
     return (
-        <div className="card bg-base-200 hover:border hover:border-accent-content shadow-sm">
+        <motion.div 
+        className="card bg-base-200 hover:border hover:border-accent-content shadow-sm"
+        whileInView={{scale: 1 , opacity: 1}}
+        initial={{scale: 0, opacity: 0}}
+        transition={transition}
+        whileHover={{transform:'translateY(-20px)'}}
+        >
             <figure>
                 <img
                     src={imageURL}
@@ -24,7 +37,7 @@ const CourseCard = ({ course }) => {
 
             </div>
                 <Link to={`/course/${slug}/${_id}`} className='btn btn-accent hover:btn-secondary w-11/12 mx-auto my-3 md:my-4 lg:my-5'>See More</Link>
-        </div>
+        </motion.div>
     );
 };
 
