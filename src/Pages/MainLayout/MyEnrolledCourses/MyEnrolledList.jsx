@@ -9,7 +9,6 @@ const MyEnrolledList = () => {
     const {user} = useAuth(); 
     const {getEnrolledByEmail} = useEnrolledApi(); 
     const [enrolledCourse, setEnrolledCourse] = useState([]);
-    console.log(enrolledCourse)
     
     useEffect(() => {
         (async()=>{

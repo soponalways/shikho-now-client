@@ -51,7 +51,6 @@ const ManageCurseList = () => {
             if(user) {
                 const data = await getCouresesByEmail(user?.email); 
                 setCourses(data)
-                console.log('useEffect run on managecourse list', data)
             }
         })()
     }, [user])
