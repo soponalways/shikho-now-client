@@ -43,9 +43,19 @@ const AuthProvider = ({children}) => {
 
     // Handle Side Effect 
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, savedUser => {
-            setLoading(false);
-            setUser(savedUser)
+        const unSubscribe = onAuthStateChanged(auth,async savedUser => {
+            
+            if(savedUser?.email){
+                const token = await savedUser.getIdToken(); 
+                setLoading(false);
+                setUser({
+                    ...savedUser, 
+                    accessToken : token
+                })
+            }else {
+                setLoading(false)
+                setUser(null)
+            }
         });
         return () => {
             unSubscribe();

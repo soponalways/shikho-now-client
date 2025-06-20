@@ -1,12 +1,7 @@
 import React, { Suspense } from 'react';
-import useManageCourseApi from '../../../Services/useManageCourseApi';
 import ManageCurseList from './ManageCurseList';
-import useAuth from '../../../hooks/useAuth';
-import LoadingSpineer from '../LoadingSpineer/LoadingSpineer';
 
 const ManageCourse = () => {
-    const { getCouresesByEmail } = useManageCourseApi(); 
-    const {user} = useAuth(); 
     return (
         <div>
             <div>
@@ -21,9 +16,7 @@ const ManageCourse = () => {
             </div>
             {/* Form Start for here  */}
             <div className='w-11/12 mx-auto my-4 md:my-6 lg:my-8'>
-                <Suspense fallback={<LoadingSpineer></LoadingSpineer>}>
-                    <ManageCurseList getCouresesByEmail={getCouresesByEmail(user.email)}></ManageCurseList>
-                </Suspense>
+                <ManageCurseList></ManageCurseList>
             </div>
         </div>
     );

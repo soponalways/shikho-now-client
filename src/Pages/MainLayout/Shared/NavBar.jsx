@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 import logoImage from '../../../assets/Logo/shikhonow.png'
 import useAuth from '../../../hooks/useAuth';
 import { toast } from 'react-toastify';
 
 const NavBar = () => {
     const { user, logoutUser } = useAuth();
+    const navigate = useNavigate() ; 
 
     const links = <>
         <li className='hover:bg-secondary rounded-sm'><NavLink to={'/'}>Home</NavLink></li>
@@ -23,6 +24,7 @@ const NavBar = () => {
         logoutUser()
             .then(() => {
                 toast.success('Logout successfull')
+                navigate('/login')
             })
             .catch(error => {
                 toast.warning(error.message)

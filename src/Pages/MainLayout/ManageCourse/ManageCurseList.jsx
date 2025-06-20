@@ -1,13 +1,18 @@
-import React, { use, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ManageCourseRow from './ManageCourseRow';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router';
+import useAuth from '../../../hooks/useAuth';
+import useManageCourseApi from '../../../Services/useManageCourseApi';
 
-const ManageCurseList = ({ getCouresesByEmail }) => {
+
+const ManageCurseList = () => {
     const axiosSecure = useAxiosSecure();
-    const [courses, setCourses] = useState(use(getCouresesByEmail))
+    const [courses, setCourses] = useState([])
+    const { user } = useAuth(); 
+    const { getCouresesByEmail } = useManageCourseApi();
 
     const handleDeleteCourse = (adminEmail, _id) => {
         Swal.fire({
@@ -40,6 +45,16 @@ const ManageCurseList = ({ getCouresesByEmail }) => {
             }
         });
     }
+
+    useEffect(() => {
+        (async() => {
+            if(user) {
+                const data = await getCouresesByEmail(user?.email); 
+                setCourses(data)
+                console.log('useEffect run on managecourse list', data)
+            }
+        })()
+    }, [user])
 
     if(courses.length === 0 ) {
             return <div>

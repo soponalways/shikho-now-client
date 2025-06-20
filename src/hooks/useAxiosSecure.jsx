@@ -9,39 +9,49 @@ const axiosInstance = axios.create({
     withCredentials: true,
 });
 
+
 const useAxiosSecure = () => {
-    const { user, logoutUser } = useContext(AuthContext);
-    const navigate = useNavigate();
-
+    const { user, logoutUser, loading } = useContext(AuthContext);
+    const navigate = useNavigate(); 
+    
     useEffect(() => {
-        // Only add interceptor if token exists
-        if (!user?.accessToken) return;
-
-        const requestInterceptor = axiosInstance.interceptors.request.use(config => {
-            config.headers.Authorization = `Bearer ${user.accessToken}`;
-            return config;
-        });
-
-        const responseInterceptor = axiosInstance.interceptors.response.use(
-            response => response,
-            async error => {
-                const status = error.response?.status;
-                if (status === 401 || status === 403) {
-                    await logoutUser();
-                    toast.error('Session expired. Please log in again.');
-                    navigate('/login');
+        if(!user) return Promise.reject("User not loggedin")
+        if (user?.accessToken) {
+            // Add request interceptor
+            const requestInterceptor = axiosInstance.interceptors.request.use(
+                async(config) => {
+                    config.headers.Authorization = `Bearer ${user.accessToken}`;
+                    return config;
                 }
-                return Promise.reject(error);
-            }
-        );
+            );
 
-        // Cleanup to remove interceptors when component unmounts or user changes
-        return () => {
-            axiosInstance.interceptors.request.eject(requestInterceptor);
-            axiosInstance.interceptors.response.eject(responseInterceptor);
-        };
-    }, [user?.accessToken, logoutUser, navigate]);
+            // Add response interceptor
+            const responseInterceptor = axiosInstance.interceptors.response.use(
+                (res) => res,
+                (err) => {
+                    if (err?.response?.status === 401 || err?.response?.status === 403) {
+                        logoutUser()
+                            .then(() => {
+                                console.log("Logged out due to token issue.");
+                                toast.success('Logged out due to token issue.')
+                                navigate('/login')
+                            })
+                            .catch(console.error);
+                    }
+                    return Promise.reject(err);
+                }
+            );
+
+            // Cleanup to prevent multiple interceptors on re-renders
+            return () => {
+                axiosInstance.interceptors.request.eject(requestInterceptor);
+                axiosInstance.interceptors.response.eject(responseInterceptor);
+            };
+        }
+    }, [user, logoutUser,  loading, navigate]);
+
     return axiosInstance;
-  };
+
+};
 
 export default useAxiosSecure;

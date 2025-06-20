@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
+import useEnrolledApi from '../../../Services/useEnrolledApi';
 
 const CourseDetails = () => {
     const course = useLoaderData();
     const { user } = useAuth();
+    const { getEnrolledByEmail } = useEnrolledApi()
     const axiosSecure = useAxiosSecure();
     const [isEnrolled, setIsEnrolled] = useState(false);
     const userEmail = user?.email;
+    // const [enrolledCourses, setInrolledCourses] = useState(use(getEnrolledByEmail(user?.email)))
+    // console.log(enrolledCourses)
     const {
         _id,
         adminEmail,

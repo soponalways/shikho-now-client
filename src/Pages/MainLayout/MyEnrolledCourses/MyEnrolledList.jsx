@@ -1,10 +1,22 @@
-import React, { use, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MyEnrolledRow from './MyEnrolledRow';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router';
+import useAuth from '../../../hooks/useAuth';
+import useEnrolledApi from '../../../Services/useEnrolledApi';
 
-const MyEnrolledList = ({ getEnrolledByEmail }) => {
-    const [enrolledCourse, setEnrolledCourse] = useState(use(getEnrolledByEmail));
+const MyEnrolledList = () => {
+    const {user} = useAuth(); 
+    const {getEnrolledByEmail} = useEnrolledApi(); 
+    const [enrolledCourse, setEnrolledCourse] = useState([]);
+    console.log(enrolledCourse)
+    
+    useEffect(() => {
+        (async()=>{
+            const data =await getEnrolledByEmail(user?.email); 
+            setEnrolledCourse(data)
+        })()
+    }, [user ])
     
     if(enrolledCourse.length === 0 ) {
         return <div>

@@ -1,12 +1,8 @@
 import React, { Suspense } from 'react';
 import MyEnrolledList from './MyEnrolledList';
-import useEnrolledApi from '../../../Services/useEnrolledApi';
 import LoadingSpineer from '../LoadingSpineer/LoadingSpineer';
-import useAuth from '../../../hooks/useAuth';
 
 const MyEnrolledCourses = () => {
-    const { getEnrolledByEmail } = useEnrolledApi(); 
-    const {user} = useAuth(); 
     return (
         <div>
             <div>
@@ -21,7 +17,7 @@ const MyEnrolledCourses = () => {
             </div>
             <div className='w-11/12 mx-auto my-4 md:my-6 lg:my-8'>
                 <Suspense fallback={<LoadingSpineer></LoadingSpineer>}>
-                    <MyEnrolledList getEnrolledByEmail={getEnrolledByEmail(user?.email)}></MyEnrolledList>
+                    <MyEnrolledList></MyEnrolledList>
                 </Suspense>
             </div>
         </div>
