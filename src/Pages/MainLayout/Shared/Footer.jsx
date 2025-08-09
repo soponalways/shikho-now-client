@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 import logo from '../../../assets/Logo/shikhonowLogo-removebg-preview.png'; 
 const Footer = () => {
     return (
-        <footer className="footer grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center sm:footer-horizontal bg-base-300 text-base-content p-10">
+        <footer className="footer container mx-auto place-items-center place-content-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center sm:footer-horizontal bg-base-300 text-base-content p-10">
             <nav>
                 <div  className='flex gap-3 md:gap-4 lg:gap-6 items-center'>
                     <img className='w-16 md:w-24 lg:w-32' src={logo} alt="Shikho Now" />
