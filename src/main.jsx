@@ -5,11 +5,17 @@ import { RouterProvider } from 'react-router'
 import router from './Router/Router'
 import AuthProvider from './Context/AuthContext/AuthProvider'
 import { Slide, ToastContainer } from 'react-toastify'
+import ClientThemeWraper from './Theme/ClientThemeWraper'
+import ThemeProvider from './Theme/ThemeProvider'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider router={router}></RouterProvider>
+      <ThemeProvider>
+        <ClientThemeWraper>
+          <RouterProvider router={router}></RouterProvider>
+        </ClientThemeWraper>
+      </ThemeProvider>
     </AuthProvider>
     <ToastContainer
       position="top-center"

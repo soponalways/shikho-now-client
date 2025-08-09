@@ -15,7 +15,7 @@ const useAxiosSecure = () => {
     const navigate = useNavigate(); 
     
     useEffect(() => {
-        if(!user) return Promise.reject("User not loggedin")
+        if(!user && !loading) return Promise.reject("User not loggedin")
         if (user?.accessToken) {
             // Add request interceptor
             const requestInterceptor = axiosInstance.interceptors.request.use(

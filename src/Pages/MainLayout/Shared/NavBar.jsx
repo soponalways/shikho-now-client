@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from 'react-router';
 import logoImage from '../../../assets/Logo/shikhonow.png'
 import useAuth from '../../../hooks/useAuth';
 import { toast } from 'react-toastify';
+import ThemeToggole from '../../../Theme/ThemeToggole';
 
 const NavBar = () => {
     const { user, logoutUser } = useAuth();
@@ -51,11 +52,12 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu menu-horizontal px-1 gap-2 items-center">
+                    <ThemeToggole></ThemeToggole>
                     {
                         user ? <div className='flex gap-3 md:gap-4 lg:gap-5 items-center'>
                             <div className="avatar">
-                                <div className="w-6 md:w-8 lg:w-12 cursor-pointer rounded-full">
+                                <div className="w-6 md:w-7 lg:w-8 cursor-pointer rounded-full">
                                     <img src={user.photoURL} />
                                 </div>
                             </div>
