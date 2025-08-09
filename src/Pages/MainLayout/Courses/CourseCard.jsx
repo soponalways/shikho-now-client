@@ -15,14 +15,14 @@ const CourseCard = ({ course }) => {
     }
     return (
         <motion.div 
-        className="card bg-base-200 hover:border hover:border-accent-content shadow-sm"
-        whileInView={{scale: 1 , opacity: 1}}
-        initial={{scale: 0, opacity: 0}}
+        className="card bg-base-200 hover:border hover:border-accent-content/20 shadow-sm"
+        initial={{transform: 'translateY(100px)', opacity: 0}}
+        whileInView={{transform: 'translateY(0)', opacity: 1}}
         transition={transition}
-        whileHover={{transform:'translateY(-20px)'}}
         >
             <figure>
                 <img
+                    className='hover:scale-105 w-full h-48 md:h-60 lg:h-72 object-center transform transform-3d duration-150'
                     src={imageURL}
                     alt={courseTitle} />
             </figure>
