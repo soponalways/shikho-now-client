@@ -15,7 +15,7 @@ const ThemeToggole = () => {
         })
     }
     return (
-        <div>
+        <div className='flex items-center'>
             <input type="checkbox" checked={theme == "light"}  onChange={handleToggole} className="toggle toggle-sm md:toggle-md" />
 
             <label className="swap swap-rotate">

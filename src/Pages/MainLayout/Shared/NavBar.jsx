@@ -12,6 +12,7 @@ const NavBar = () => {
     const links = <>
         <li className='hover:bg-secondary rounded-sm'><NavLink to={'/'}>Home</NavLink></li>
         <li className='hover:bg-secondary rounded-sm'><NavLink to={'/courses'}>Courses</NavLink></li>
+        <li className='hover:bg-secondary rounded-sm'><NavLink to={'/about'}>About</NavLink></li>
         {
             user && <>
                 <li className='hover:bg-secondary rounded-sm'><NavLink to={'/addCourse'}>Add Course</NavLink></li>
@@ -32,7 +33,7 @@ const NavBar = () => {
             })
     }
     return (
-        <div className="navbar container mx-auto border-x-0  py-0 px-5 md:px-10 lg:px-14">
+        <div className="navbar container mx-auto border-x-0  py-0 w-11/12 ">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -52,7 +53,7 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <ul className="menu menu-horizontal px-1 gap-2 items-center">
+                <ul className="menu menu-horizontal flex-nowrap px-1 gap-2 items-center">
                     <ThemeToggole></ThemeToggole>
                     {
                         user ? <div className='flex gap-3 md:gap-4 lg:gap-5 items-center'>

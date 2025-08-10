@@ -13,6 +13,9 @@ import axios from "axios";
 import CourseDetails from "../Pages/MainLayout/CourseDetails/CourseDetails";
 import MyEnrolledCourses from "../Pages/MainLayout/MyEnrolledCourses/MyEnrolledCourses";
 import ErrorPage from "../Pages/ErrorPages/ErrorPage";
+import AboutPage from "../Pages/MainLayout/AboutUs/AboutPage";
+import Forbidden from "../Pages/ErrorPages/Forbidden";
+import UnAuthorized from "../Pages/ErrorPages/UnAuthorized";
 
 const router = createBrowserRouter([
     {
@@ -47,8 +50,10 @@ const router = createBrowserRouter([
             {
                 path: '/courses',
                 Component: Courses,
-                loader: () => axios.get(`${import.meta.env.VITE_API_URL}/courses`).then(res => res.data),
-                HydrateFallback: LoadingSpineer
+            },
+            {
+                path: '/about',
+                Component: AboutPage
             },
             {
                 path: `/course/:slug/:course_id`,
@@ -59,6 +64,14 @@ const router = createBrowserRouter([
             {
                 path: '/enrolled', 
                 element: <PrivateRoute><MyEnrolledCourses></MyEnrolledCourses></PrivateRoute>
+            }, 
+            {
+                path: '/forbidden',
+                Component: Forbidden
+            },
+            {
+                path: '/unauthorized',
+                Component: UnAuthorized
             }
         ]
     }, 

@@ -17,28 +17,7 @@ const Banner = () => {
         autoplay: true,
         nextArrow: <ArrowButton />,
         prevArrow: <ArrowButton />, 
-        appendDots: dots => (
-            <div
-                style={{
-
-                    borderRadius: "10px",
-                    padding: "10px"
-                }}
-            >
-                <ul style={{ margin: "0px" }}> {dots} </ul>
-            </div>
-        ),
-        customPaging: i => (
-            <div
-                style={{
-                    width: "30px",
-                    color: "#e5e8ed",
-                    border: "1px #e5e8ed solid",
-                }}
-            >
-                {i + 1}
-            </div>
-        )
+        autoplaySpeed: 3000,
     };
 
     return (

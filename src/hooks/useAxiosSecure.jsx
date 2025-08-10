@@ -29,7 +29,7 @@ const useAxiosSecure = () => {
             const responseInterceptor = axiosInstance.interceptors.response.use(
                 (res) => res,
                 (err) => {
-                    if (err?.response?.status === 401 || err?.response?.status === 403) {
+                    if (err?.response?.status === 401 ) {
                         logoutUser()
                             .then(() => {
                                 console.log("Logged out due to token issue.");
@@ -37,6 +37,10 @@ const useAxiosSecure = () => {
                                 navigate('/login')
                             })
                             .catch(console.error);
+                    }
+                    if (err?.response?.status === 403) {
+                        toast.error('Forbidden access');
+                        navigate('/forbidden')
                     }
                     return Promise.reject(err);
                 }
