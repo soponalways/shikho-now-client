@@ -16,9 +16,11 @@ const Footer = () => {
             </nav>
             <nav>
                 <Link className='hover:underline hover:text-secondary' to='/'>Home</Link>
-                <Link className='hover:underline hover:text-secondary' to='/'>About US</Link>
-                <Link className='hover:underline hover:text-secondary' to='/'>Career</Link>
-                <Link className='hover:underline hover:text-secondary' to='/'>Privacy Policy</Link>
+                <Link className='hover:underline hover:text-secondary' to='/about'>About US</Link>
+                <Link className='hover:underline hover:text-secondary' to='/addCourse'>Add Course</Link>
+                <Link className='hover:underline hover:text-secondary' to='/manageCourse'>Manage Course</Link>
+                <Link className='hover:underline hover:text-secondary' to='/courses'>All Courses</Link>
+                <Link className='hover:underline hover:text-secondary' to='/enrolled'>Enrolled Courses</Link>
             </nav>
             <nav>
                 <h6 className="footer-title">Folow Us on</h6>
