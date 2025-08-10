@@ -1,19 +1,6 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 import CourseCard from '../../Courses/CourseCard';
 
-const CoursesSection = () => {
-    const [courses , setCourses] = useState([]); 
-
-    // Handle Side Effect 
-    useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/courses/latest`)
-        .then(res => setCourses(res.data))
-        .catch(error => {
-            toast.error(error.message)
-        })
-    }, [])
+const CoursesSection = ({courses}) => {
     return (
         <div>
             <div className='text-center space-y-2 md:space-y-3 lg:space-y-4'>

@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import Banner from "./Banner/Banner";
 import CoursesSection from "./CoursesSection/CoursesSection";
 import LearingingIsEarning from "./LearningIsEarning/LearingingIsEarning";
@@ -6,8 +7,24 @@ import ProjectsBasedLearning from "./ProjectsBaseLearing/ProjectsBasedLearning";
 import StudentSuccessStories from "./StudentSuccessStories/StudentSuccessStories";
 import TrustedByProfessionals from "./TrustedByProfessionals/TrustedByProfessionals";
 import WhyLearnWithUs from "./WhyLearnWithUs/WhyLearnWithUs";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import LoadingSpineer from "../LoadingSpineer/LoadingSpineer";
 
 const Home = () => {
+    const axiosPublic = useAxiosPublic();
+    const {data:courses=[], isLoading:coursesIsLoading} = useQuery({
+        queryKey: ['courses'],
+        queryFn: async () => {
+            const res = await axiosPublic.get("/courses/latest");
+            return res.data;
+        }
+    });
+
+    if(coursesIsLoading) {
+        return <div>
+            <LoadingSpineer></LoadingSpineer>
+        </div>
+    }
     return (
         <div>
             <div>
@@ -19,7 +36,7 @@ const Home = () => {
             <main>
                 {/* courses Section  */}
                 <section className="my-4 md:my-6 lg:my-8">
-                    <CoursesSection></CoursesSection>
+                    <CoursesSection courses={courses} ></CoursesSection>
                 </section>
                 {/* popular courses Section  */}
                 <section className="my-4 md:my-6 lg:my-8">

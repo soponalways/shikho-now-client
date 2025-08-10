@@ -1,3 +1,4 @@
+import { motion } from 'motion/react';
 export default function StudentSuccessStories() {
     const stories = [
         {
@@ -32,7 +33,12 @@ export default function StudentSuccessStories() {
 
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {stories.map((story, idx) => (
-                        <div key={idx} className="card bg-base-200 shadow-md hover:shadow-lg shadow-primary transition">
+                        <motion.div 
+                        key={idx} 
+                        initial={{ opacity: 0, y: 100 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut", transitionBehavior: "smooth" }}
+                        className="card bg-base-200 shadow-md hover:shadow-lg shadow-primary transition">
                             <figure className="px-6 pt-6">
                                 <img src={story.image} alt={story.name} className="hover:scale-105 transition-transform rounded-xl h-48 w-full object-cover" />
                             </figure>
@@ -41,7 +47,7 @@ export default function StudentSuccessStories() {
                                 <p className="text-sm text-primary mb-2">{story.course}</p>
                                 <p className="text-sm text-base-content/70 italic">"{story.quote}"</p>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
