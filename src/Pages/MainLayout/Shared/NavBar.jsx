@@ -12,6 +12,7 @@ const NavBar = () => {
     const links = <>
         <li className='hover:bg-secondary rounded-sm'><NavLink to={'/'}>Home</NavLink></li>
         <li className='hover:bg-secondary rounded-sm'><NavLink to={'/courses'}>Courses</NavLink></li>
+        <li className='hover:bg-secondary rounded-sm'><NavLink to={'/about'}>About</NavLink></li>
         {
             user && <>
                 <li className='hover:bg-secondary rounded-sm'><NavLink to={'/addCourse'}>Add Course</NavLink></li>

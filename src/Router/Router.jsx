@@ -13,6 +13,7 @@ import axios from "axios";
 import CourseDetails from "../Pages/MainLayout/CourseDetails/CourseDetails";
 import MyEnrolledCourses from "../Pages/MainLayout/MyEnrolledCourses/MyEnrolledCourses";
 import ErrorPage from "../Pages/ErrorPages/ErrorPage";
+import AboutPage from "../Pages/MainLayout/AboutUs/AboutPage";
 
 const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
             {
                 path: '/courses',
                 Component: Courses,
+            },
+            {
+                path: '/about',
+                Component: AboutPage
             },
             {
                 path: `/course/:slug/:course_id`,
