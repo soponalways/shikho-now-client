@@ -47,8 +47,6 @@ const router = createBrowserRouter([
             {
                 path: '/courses',
                 Component: Courses,
-                loader: () => axios.get(`${import.meta.env.VITE_API_URL}/courses`).then(res => res.data),
-                HydrateFallback: LoadingSpineer
             },
             {
                 path: `/course/:slug/:course_id`,
