@@ -3,6 +3,7 @@ import CoursesSection from "./CoursesSection/CoursesSection";
 import LearingingIsEarning from "./LearningIsEarning/LearingingIsEarning";
 import PopularCourses from "./PopularCourses/PopularCourses";
 import ProjectsBasedLearning from "./ProjectsBaseLearing/ProjectsBasedLearning";
+import WhyLearnWithUs from "./WhyLearnWithUs/WhyLearnWithUs";
 
 const Home = () => {
     return (
@@ -21,6 +22,10 @@ const Home = () => {
                 {/* popular courses Section  */}
                 <section className="my-4 md:my-6 lg:my-8">
                     <PopularCourses></PopularCourses>
+                </section>
+                {/* Whhy Learn with Shikho now platform */}
+                <section className="my-4 md:my-6 lg:my-8">
+                    <WhyLearnWithUs></WhyLearnWithUs>
                 </section>
 
                 {/* Learing is Earning section  */}
