@@ -14,6 +14,8 @@ import CourseDetails from "../Pages/MainLayout/CourseDetails/CourseDetails";
 import MyEnrolledCourses from "../Pages/MainLayout/MyEnrolledCourses/MyEnrolledCourses";
 import ErrorPage from "../Pages/ErrorPages/ErrorPage";
 import AboutPage from "../Pages/MainLayout/AboutUs/AboutPage";
+import Forbidden from "../Pages/ErrorPages/Forbidden";
+import UnAuthorized from "../Pages/ErrorPages/UnAuthorized";
 
 const router = createBrowserRouter([
     {
@@ -62,6 +64,14 @@ const router = createBrowserRouter([
             {
                 path: '/enrolled', 
                 element: <PrivateRoute><MyEnrolledCourses></MyEnrolledCourses></PrivateRoute>
+            }, 
+            {
+                path: '/forbidden',
+                Component: Forbidden
+            },
+            {
+                path: '/unauthorized',
+                Component: UnAuthorized
             }
         ]
     }, 
