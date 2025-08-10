@@ -39,7 +39,7 @@ const Login = () => {
         })
     }
     return (
-        <div>
+        <div className="text-base-content">
             <div>
                 <title>Login Your Account</title>
             </div>
@@ -65,7 +65,7 @@ const Login = () => {
                         <input type={visible ? 'text' : 'password'} name="password" className="input w-full" placeholder="Enter Your Password" />
                         <span className='absolute top-10 right-5 cursor-pointer' onClick={() => setVisible(previous => !previous)}>{visible ? <FaEyeSlash size={16} /> : <FaEye size={16} /> }</span>
                     </div>
-                    <input type="submit" className="btn btn-secondary my-3" value="Login now" />
+                    <input type="submit" className="btn btn-secondary hover:bg-accent border-none my-3" value="Login now" />
                 </form>
             </fieldset>
         </div>

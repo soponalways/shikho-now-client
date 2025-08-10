@@ -133,7 +133,7 @@ const Register = () => {
                     {
                         error && <p className='text-red-500 font-medium text-base'>{error}</p>
                     }
-                    <input type="submit" className="btn btn-secondary my-3" value="Register now" />
+                    <input type="submit" className="btn btn-secondary hover:bg-accent border-none my-3" value="Register now" />
                 </form>
             </fieldset>
         </div>

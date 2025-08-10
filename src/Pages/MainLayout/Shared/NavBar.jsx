@@ -53,7 +53,7 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <ul className="menu menu-horizontal px-1 gap-2 items-center">
+                <ul className="menu menu-horizontal flex-nowrap px-1 gap-2 items-center">
                     <ThemeToggole></ThemeToggole>
                     {
                         user ? <div className='flex gap-3 md:gap-4 lg:gap-5 items-center'>
