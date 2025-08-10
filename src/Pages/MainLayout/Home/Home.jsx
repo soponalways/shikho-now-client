@@ -3,6 +3,7 @@ import CoursesSection from "./CoursesSection/CoursesSection";
 import LearingingIsEarning from "./LearningIsEarning/LearingingIsEarning";
 import PopularCourses from "./PopularCourses/PopularCourses";
 import ProjectsBasedLearning from "./ProjectsBaseLearing/ProjectsBasedLearning";
+import StudentSuccessStories from "./StudentSuccessStories/StudentSuccessStories";
 import TrustedByProfessionals from "./TrustedByProfessionals/TrustedByProfessionals";
 import WhyLearnWithUs from "./WhyLearnWithUs/WhyLearnWithUs";
 
@@ -31,6 +32,10 @@ const Home = () => {
                 { /* Trusted by Professionals section  */ }
                 <section className="my-4 md:my-6 lg:my-8">
                     <TrustedByProfessionals></TrustedByProfessionals>
+                </section>
+                { /* Student Success Stories section  */ }
+                <section className="my-4 md:my-6 lg:my-8">
+                    <StudentSuccessStories></StudentSuccessStories>
                 </section>
 
                 {/* Learing is Earning section  */}
